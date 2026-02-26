@@ -69,7 +69,7 @@ if uploaded_file is not None:
         
         st.subheader("2. Konfigurasi Kolom Target")
         if detected_col:
-            st.success(f"✅ Sistem otomatis mendeteksi kolom nama: **'{detected_col}'**")
+            st.success(f"✅ Sistem otomatis mendeteksi kolom: **'{detected_col}'**")
             target_col = st.selectbox("Pilih kolom yang berisi Nama Lengkap:", df.columns, index=list(df.columns).index(detected_col))
         else:
             st.warning("⚠️ Sistem tidak menemukan kolom dengan nama 'Nama' atau 'Name'. Silakan pilih secara manual.")
