@@ -61,7 +61,7 @@ if uploaded_file is not None:
     try:
         df = pd.read_excel(uploaded_file)
         
-        st.subheader(f"1. Preview Data Asli, Jumlah {len(df)} ")
+        st.subheader(f"1. Preview Data Asli, Jumlah Data: {len(df)} ")
         st.dataframe(df.head(5), use_container_width=True)
         
         # Deteksi kolom nama
