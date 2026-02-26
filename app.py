@@ -2,6 +2,7 @@ import streamlit as st
 import pandas as pd
 import matplotlib.pyplot as plt
 import io
+import time
 import math
 from gradio_client import Client
 
@@ -45,7 +46,7 @@ def create_excel_download(df):
 # ==========================================
 # 3. ANTARMUKA PENGGUNA (UI)
 # ==========================================
-st.title("📊 Batch Auto-Predict Gender berbasis AI")
+st.title("📊 Mass Gender-Indo_Name Prediction Tool")
 st.markdown("""
 Unggah dataset Excel Anda di bawah ini. Sistem akan otomatis mencari kolom **Nama** dan menggunakan model *Hybrid MLE-BiLSTM* Anda untuk melabeli Jenis Kelamin secara massal.
 """)
@@ -93,6 +94,8 @@ if uploaded_file is not None:
             all_confidence = []
             
             try:
+                # Mualai hitung waktu
+                start_time = time.time()
                 # 3. Kirim data per potongan (chunk) ke Hugging Face
                 for i in range(total_batches):
                     # Potong list dari indeks awal ke akhir untuk batch ini
@@ -111,8 +114,11 @@ if uploaded_file is not None:
                     
                     # Update progress bar
                     progress_bar.progress((i + 1) / total_batches)
+
+                end_time = time.time()
+                total_inference_time = end_time - start_time
                 
-                status_text.success(f"✅ Pemrosesan {total_data} data Selesai!")
+                status_text.success(f"✅ Pemrosesan {total_data:,} data Selesai dalam waktu **{total_inference_time:.2f} detik**!")
                 
                 # 4. Masukkan hasil akhir ke dalam DataFrame
                 df['pred_gender'] = all_pred_genders
