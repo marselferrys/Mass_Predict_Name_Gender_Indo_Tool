@@ -48,7 +48,7 @@ def create_excel_download(df):
 # ==========================================
 st.title("📊 Mass Gender-Indo_Name Prediction Tool")
 st.markdown("""
-Unggah dataset Excel Anda di bawah ini. Sistem akan otomatis mencari kolom **Nama** dan menggunakan model *Hybrid MLE-BiLSTM* Anda untuk melabeli Jenis Kelamin secara massal.
+Unggah dataset Excel Anda di bawah ini. Sistem akan otomatis mencari kolom **Nama** dan menggunakan model *Hybrid MLE-BiLSTM*  untuk melabeli Jenis Kelamin secara massal.
 """)
 
 st.markdown("---")
