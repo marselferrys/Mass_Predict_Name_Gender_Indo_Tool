@@ -145,7 +145,7 @@ if uploaded_file is not None:
                     )
                     
                 with col2:
-                    st.markdown("**Distribusi Gender:**")
+                    st.markdown("**Distribusi Data:**")
                     # Mapping ulang jika API me-return M/F menjadi Laki-laki/Perempuan (Opsional, jaga-jaga)
                     df['pred_gender'] = df['pred_gender'].replace({'M': 'Laki-laki', 'F': 'Perempuan'})
                     
