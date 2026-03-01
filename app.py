@@ -137,7 +137,7 @@ if uploaded_file is not None:
                     # Tombol Download
                     excel_data = create_excel_download(df)
                     st.download_button(
-                        label="💾 Unduh File Excel Hasil Prediksi (.xlsx)",
+                        label="💾 Unduh File (.xlsx)",
                         data=excel_data,
                         file_name="Dataset_Gender_Predicted.xlsx",
                         mime="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
