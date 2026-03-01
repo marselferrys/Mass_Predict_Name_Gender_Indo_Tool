@@ -82,7 +82,7 @@ if uploaded_file is not None:
             list_nama_lengkap = df[target_col].astype(str).tolist()
             total_data = len(list_nama_lengkap)
             
-            # 2. Tentukan ukuran per paket (Batas aman: 5.000 data per pengiriman API)
+            # 2. Tentukan ukuran per paket
             batch_size = 5000 
             total_batches = math.ceil(total_data / batch_size)
             
@@ -123,6 +123,7 @@ if uploaded_file is not None:
                 # 4. Masukkan hasil akhir ke dalam DataFrame
                 df['pred_gender'] = all_pred_genders
                 df['confidence_score'] = all_confidence
+                df['pred_gender'] = df['pred_gender'].replace({'M': 'L', 'F': 'P'})
                 
                 st.markdown("---")
                 st.subheader("3. Hasil Prediksi")
@@ -146,8 +147,7 @@ if uploaded_file is not None:
                     
                 with col2:
                     st.markdown("**Distribusi Data:**")
-                    # Mapping ulang jika API me-return M/F menjadi Laki-laki/Perempuan (Opsional, jaga-jaga)
-                    df['pred_gender'] = df['pred_gender'].replace({'M': 'Laki-laki', 'F': 'Perempuan'})
+                    df['pred_gender'] = df['pred_gender'].replace({'L': 'Laki-laki', 'P': 'Perempuan'})
                     
                     # Menghitung jumlah Laki-laki & Perempuan
                     df_valid = df[df['pred_gender'].isin(['Laki-laki', 'Perempuan'])]
