@@ -157,7 +157,7 @@ if uploaded_file is not None:
                         # Visualisasi Pie Chart
                         fig, ax = plt.subplots(figsize=(4, 4))
                         # Set warna statis: Laki-laki Hijau, Perempuan Oranye
-                        colors = ['#2E7D32' if x == 'Laki-laki' else '#C2185B' for x in gender_counts.index]
+                        colors = ['#0072B2' if x == 'Laki-laki' else '#E69F00' for x in gender_counts.index]
                         
                         ax.pie(
                             gender_counts, 
