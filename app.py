@@ -83,10 +83,10 @@ if uploaded_file is not None:
         col_btn1, col_btn2 = st.columns([1,1])
 
         with col_btn1:
-        start_prediction = st.button("🚀 Mulai Prediksi", type="primary")
+            start_prediction = st.button("🚀 Mulai Prediksi", type="primary")
 
         with col_btn2:
-        cancel_prediction = st.button("❌ Cancel")
+            cancel_prediction = st.button("❌ Cancel")
     
         if cancel_prediction:
             st.session_state.cancel_process = True
