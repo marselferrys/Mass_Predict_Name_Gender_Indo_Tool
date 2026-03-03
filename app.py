@@ -146,22 +146,26 @@ if uploaded_file is not None:
                     )
                     
                 with col2:
-                    st.markdown("**Distribusi Data:**")
+                    st.markdown("**Distribusi Data (error rate 5%:**")
                     df['pred_gender'] = df['pred_gender'].replace({'L': 'Laki-laki', 'P': 'Perempuan'})
                     
                     # Menghitung jumlah Laki-laki & Perempuan
                     df_valid = df[df['pred_gender'].isin(['Laki-laki', 'Perempuan'])]
                     gender_counts = df_valid['pred_gender'].value_counts()
+                    error_rate = 0.05  # error rate 5%
+                    # Kurangi 5% dari masing-masing kategori
+                    gender_counts_adjusted = (gender_counts * (1 - error_rate)).round().astype(int)
+
                     
-                    if not gender_counts.empty:
+                    if not gender_counts_adjusted.empty:
                         # Visualisasi Pie Chart
                         fig, ax = plt.subplots(figsize=(4, 4))
                         # Set warna statis: Laki-laki Hijau, Perempuan Oranye
-                        colors = ['#0072B2' if x == 'Laki-laki' else '#E69F00' for x in gender_counts.index]
+                        colors = ['#0072B2' if x == 'Laki-laki' else '#E69F00' for x in gender_counts_adjusted.index]
                         
                         ax.pie(
                             gender_counts, 
-                            labels=gender_counts.index, 
+                            labels=gender_counts_adjusted.index, 
                             autopct='%1.1f%%', 
                             startangle=90, 
                             colors=colors,
