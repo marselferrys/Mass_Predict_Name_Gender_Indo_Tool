@@ -169,7 +169,7 @@ if uploaded_file is not None:
                             autopct='%1.1f%%', 
                             startangle=90, 
                             colors=colors,
-                            textprops={'fontsize': 10
+                            textprops={'fontsize': 10,
                                       'fontweight': 'bold'
                                       }
                         )
