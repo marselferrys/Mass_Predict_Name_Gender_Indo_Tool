@@ -169,9 +169,14 @@ if uploaded_file is not None:
                             autopct='%1.1f%%', 
                             startangle=90, 
                             colors=colors,
-                            textprops={'fontsize': 10,
-                                      'fontweight': 'bold'
-                                      }
+                            # Bold hanya label kategori
+                            for text in texts:
+                                text.set_fontweight('bold')
+                                text.set_fontsize(10)
+
+                            # Persentase tetap normal
+                            for autotext in autotexts:
+                                autotext.set_fontsize(9)
                         )
                         ax.axis('equal') 
                         st.pyplot(fig)
