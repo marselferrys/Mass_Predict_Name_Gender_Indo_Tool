@@ -173,6 +173,8 @@ if uploaded_file is not None:
                         )
                         ax.axis('equal') 
                         st.pyplot(fig)
+                        st.caption("Catatan: Distribusi pada pie chart merupakan hasil prediksi yang telah "
+                                    "disesuaikan dengan asumsi error rate sebesar 5% pada masing-masing kategori.")
                     else:
                         st.info("Tidak ada data valid untuk ditampilkan pada grafik.")
 
