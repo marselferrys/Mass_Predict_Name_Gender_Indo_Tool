@@ -153,19 +153,27 @@ if uploaded_file is not None:
                     # Menghitung jumlah Laki-laki & Perempuan
                     df_valid = df[df['pred_gender'].isin(['Laki-laki', 'Perempuan'])]
                     gender_counts = df_valid['pred_gender'].value_counts()
-                    # Kurangi 5% dari masing-masing kategori
-                    gender_counts_adjusted = (gender_counts * (1 - (error_rate/100))).round().astype(int)
 
+                    show_adjusted = st.toggle("SWITCH", value=True)
+
+                    if show_adjusted:
+                        # Kurangi error rate  dari masing-masing kategori
+                        gender_counts_used = (gender_counts * (1 - (error_rate/100))).round().astype(int)
+                        st.caption("Mode: Setelah dikurangi error rate")
+                    else: 
+                        gender_counts_used = gender_counts
+                        st.caption("Mode: Distribusi asli (tanpa pengurangan error rate)")
                     
-                    if not gender_counts_adjusted.empty:
+                    
+                    if not gender_counts_used.empty:
                         # Visualisasi Pie Chart
                         fig, ax = plt.subplots(figsize=(4, 4))
                         # Set warna statis: Laki-laki Hijau, Perempuan Oranye
                         colors = ['#0072B2' if x == 'Laki-laki' else '#E69F00' for x in gender_counts_adjusted.index]
                         
                         wedges, texts, autotexts = ax.pie(
-                            gender_counts_adjusted, 
-                            labels=gender_counts_adjusted.index, 
+                            gender_counts_used, 
+                            labels=gender_counts_used.index, 
                             autopct='%1.1f%%', 
                             startangle=90, 
                             colors=colors,   
