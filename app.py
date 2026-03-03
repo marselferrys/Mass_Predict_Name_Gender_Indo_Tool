@@ -154,7 +154,7 @@ if uploaded_file is not None:
                     df_valid = df[df['pred_gender'].isin(['Laki-laki', 'Perempuan'])]
                     gender_counts = df_valid['pred_gender'].value_counts()
                     # Kurangi 5% dari masing-masing kategori
-                    gender_counts_adjusted = (gender_counts * (1 - (error_rate/100)).round().astype(int)
+                    gender_counts_adjusted = (gender_counts * (1 - (error_rate/100))).round().astype(int)
 
                     
                     if not gender_counts_adjusted.empty:
