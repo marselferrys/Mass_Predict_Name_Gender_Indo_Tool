@@ -163,7 +163,7 @@ if uploaded_file is not None:
                         # Set warna statis: Laki-laki Hijau, Perempuan Oranye
                         colors = ['#0072B2' if x == 'Laki-laki' else '#E69F00' for x in gender_counts_adjusted.index]
                         
-                        ax.pie(
+                        wedges, texts, autotexts = ax.pie(
                             gender_counts_adjusted, 
                             labels=gender_counts_adjusted.index, 
                             autopct='%1.1f%%', 
