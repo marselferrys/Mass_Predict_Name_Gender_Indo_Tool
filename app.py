@@ -240,7 +240,7 @@ if uploaded_file is not None:
                     fig, ax = plt.subplots(figsize=(4, 4))
 
                     colors = [
-                        '#0072B2' if x == 'Laki-laki' else '#E69F00'
+                        '#1A237E' if x == 'Laki-laki' else '#FBC02D'
                         for x in gender_counts_used.index
                     ]
 
