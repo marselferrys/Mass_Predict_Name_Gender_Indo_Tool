@@ -146,15 +146,15 @@ if uploaded_file is not None:
                     )
                     
                 with col2:
-                    error_rate = 0.05  # error rate 5%
-                    st.markdown(f"**Distribusi Data (error rate {error_rate*100}%) :**")
+                    error_rate = 5  # error rate 5%
+                    st.markdown(f"**Distribusi Data (error rate {error_rate}%) :**")
                     df['pred_gender'] = df['pred_gender'].replace({'L': 'Laki-laki', 'P': 'Perempuan'})
                     
                     # Menghitung jumlah Laki-laki & Perempuan
                     df_valid = df[df['pred_gender'].isin(['Laki-laki', 'Perempuan'])]
                     gender_counts = df_valid['pred_gender'].value_counts()
                     # Kurangi 5% dari masing-masing kategori
-                    gender_counts_adjusted = (gender_counts * (1 - error_rate)).round().astype(int)
+                    gender_counts_adjusted = (gender_counts * (1 - (error_rate/100)).round().astype(int)
 
                     
                     if not gender_counts_adjusted.empty:
@@ -174,7 +174,7 @@ if uploaded_file is not None:
                         ax.axis('equal') 
                         st.pyplot(fig)
                         st.caption(f"Catatan: Distribusi pie chart merupakan hasil prediksi yang telah "
-                                    f"dikurangi dari asumsi error rate sebesar {error_rate*100}% pada masing-masing gender.")
+                                    f"dikurangi dari asumsi error rate sebesar {error_rate}% pada masing-masing gender.")
                     else:
                         st.info("Tidak ada data valid untuk ditampilkan pada grafik.")
 
