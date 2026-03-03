@@ -183,7 +183,7 @@ if uploaded_file is not None:
                         st.caption("Mode: Setelah dikurangi error rate")
                     else: 
                         gender_counts_used = gender_counts
-                        st.caption("Mode: Distribusi asli (tanpa pengurangan error rate)")
+                        st.caption("Mode: Distribusi asli")
                     
                     
                     if not gender_counts_used.empty:
