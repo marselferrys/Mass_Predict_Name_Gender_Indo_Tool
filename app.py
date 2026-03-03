@@ -76,7 +76,7 @@ if uploaded_file is not None:
             target_col = st.selectbox("Pilih kolom yang berisi Nama Lengkap:", df.columns)
             
         # C. TOMBOL EKSEKUSI PREDIKSI (VERSI CHUNKING AMAN)
-        if st.button("🚀 Mulai Prediksi Massal", type="primary"):
+        if st.button("🚀 Mulai Prediksi", type="primary"):
             
             # 1. Ambil seluruh data nama menjadi satu List
             list_nama_lengkap = df[target_col].astype(str).tolist()
