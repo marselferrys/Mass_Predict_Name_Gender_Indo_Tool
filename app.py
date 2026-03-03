@@ -146,7 +146,7 @@ if uploaded_file is not None:
                     )
                     
                 with col2:
-                    st.markdown("**Distribusi Data (error rate 5%:**")
+                    st.markdown("**Distribusi Data (error rate 5%) :**")
                     df['pred_gender'] = df['pred_gender'].replace({'L': 'Laki-laki', 'P': 'Perempuan'})
                     
                     # Menghitung jumlah Laki-laki & Perempuan
