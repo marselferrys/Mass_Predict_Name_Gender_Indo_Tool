@@ -23,7 +23,7 @@ if "result_df" not in st.session_state:
 
 
 # ==========================================
-# 2. CACHE CLIENT (HARUS GLOBAL)
+# 2. CACHE CLIENT 
 # ==========================================
 @st.cache_resource
 def get_hf_client():
@@ -214,7 +214,7 @@ if uploaded_file is not None:
             # PIE CHART
             # =========================
             with col2:
-                error_rate = 5
+                error_rate = 5 # assign nilai error rate
                 st.markdown(f"**Distribusi Data (error rate {error_rate}%)**")
 
                 df['pred_gender'] = df['pred_gender'].replace(
@@ -263,10 +263,8 @@ if uploaded_file is not None:
                     st.pyplot(fig)
 
                     if show_adjusted:
-                        st.caption(
-                            f"Distribusi telah disesuaikan "
-                            f"dengan error rate {error_rate}%."
-                        )
+                        st.caption(f"Catatan: Distribusi pie chart merupakan hasil prediksi yang telah " 
+                                   f"dikurangi dari asumsi error rate sebesar {error_rate}% pada masing-masing gender.")
 
                 else:
                     st.info("Tidak ada data valid.")
