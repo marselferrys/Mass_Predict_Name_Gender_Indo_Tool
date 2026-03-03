@@ -11,13 +11,16 @@ from gradio_client import Client
 # ==========================================
 st.set_page_config(page_title="Auto-Predict Gender", page_icon="📊", layout="wide")
 
-@st.cache_resource
-def get_hf_client():
-    # Menginisiasi koneksi ke Hugging Face Space Anda
-    API_URL = "marselferrys/indo_name-gender-prediction"
-    return Client(API_URL)
+if "cancel_process" not in st.session_state:
+    st.session_state.cancel_process = False
 
-client = get_hf_client()
+    @st.cache_resource
+    def get_hf_client():
+        # Menginisiasi koneksi ke Hugging Face Space Anda
+        API_URL = "marselferrys/indo_name-gender-prediction"
+        return Client(API_URL)
+    
+    client = get_hf_client()
 
 # ==========================================
 # 2. FUNGSI PENDUKUNG (MODULAR)
@@ -76,7 +79,20 @@ if uploaded_file is not None:
             target_col = st.selectbox("Pilih kolom yang berisi Nama Lengkap:", df.columns)
             
         # C. TOMBOL EKSEKUSI PREDIKSI (VERSI CHUNKING AMAN)
-        if st.button("🚀 Mulai Prediksi", type="primary"):
+
+        col_btn1, col_btn2 = st.columns([1,1])
+
+        with col_btn1:
+        start_prediction = st.button("🚀 Mulai Prediksi", type="primary")
+
+        with col_btn2:
+        cancel_prediction = st.button("❌ Cancel")
+    
+        if cancel_prediction:
+            st.session_state.cancel_process = True
+
+        if start_prediction:
+            st.session_state.cancel_process = False
             
             # 1. Ambil seluruh data nama menjadi satu List
             list_nama_lengkap = df[target_col].astype(str).tolist()
@@ -98,6 +114,11 @@ if uploaded_file is not None:
                 start_time = time.time()
                 # 3. Kirim data per potongan (chunk) ke Hugging Face
                 for i in range(total_batches):
+
+                    if st.session_state.cancel_process:
+                        status_text.warning("⛔ Proses dibatalkan oleh pengguna.")
+                        break
+        
                     # Potong list dari indeks awal ke akhir untuk batch ini
                     start_idx = i * batch_size
                     end_idx = min((i + 1) * batch_size, total_data)
