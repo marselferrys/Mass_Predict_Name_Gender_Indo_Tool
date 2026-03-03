@@ -14,13 +14,13 @@ st.set_page_config(page_title="Auto-Predict Gender", page_icon="📊", layout="w
 if "cancel_process" not in st.session_state:
     st.session_state.cancel_process = False
 
-    @st.cache_resource
-    def get_hf_client():
-        # Menginisiasi koneksi ke Hugging Face Space Anda
-        API_URL = "marselferrys/indo_name-gender-prediction"
-        return Client(API_URL)
+@st.cache_resource
+def get_hf_client():
+    # Menginisiasi koneksi ke Hugging Face Space Anda
+    API_URL = "marselferrys/indo_name-gender-prediction"
+    return Client(API_URL)
     
-    client = get_hf_client()
+client = get_hf_client()
 
 # ==========================================
 # 2. FUNGSI PENDUKUNG (MODULAR)
