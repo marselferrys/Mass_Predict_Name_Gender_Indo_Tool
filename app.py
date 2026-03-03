@@ -172,12 +172,13 @@ if uploaded_file is not None:
                         )
                         # Bold hanya label kategori
                         for text in texts:
-                                text.set_fontweight('bold')
-                                text.set_fontsize(10)
+                            text.set_fontweight('bold')
+                            text.set_fontsize(10)
 
                             # Persentase tetap normal
-                            for autotext in autotexts:
-                                autotext.set_fontsize(9)
+                        for autotext in autotexts:
+                            autotext.set_fontsize(9)
+                            
                         ax.axis('equal') 
                         st.pyplot(fig)
                         st.caption(f"Catatan: Distribusi pie chart merupakan hasil prediksi yang telah "
