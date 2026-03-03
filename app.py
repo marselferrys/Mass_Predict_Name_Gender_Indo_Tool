@@ -80,13 +80,13 @@ if uploaded_file is not None:
             
         # C. TOMBOL EKSEKUSI PREDIKSI (VERSI CHUNKING AMAN)
 
-        col_btn1, col_btn2 = st.columns([1,1])
+        col_btn1, col_btn2 = st.columns([1,1], gap="small")
 
         with col_btn1:
-            start_prediction = st.button("🚀 Mulai Prediksi", type="primary")
+            start_prediction = st.button("🚀 Mulai Prediksi", type="primary", use_container_width=True)
 
         with col_btn2:
-            cancel_prediction = st.button("❌ Cancel")
+            cancel_prediction = st.button("❌ Cancel", use_container_width=True)
     
         if cancel_prediction:
             st.session_state.cancel_process = True
