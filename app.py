@@ -44,7 +44,7 @@ def reset_state():
     st.session_state.result_df = None
     
 def find_name_column(columns):
-    target_keywords = ["nama", "name"]
+    target_keywords = ["nama", "name", "nama peserta", "nama mahasiswa", "nama siswa"]
     for col in columns:
         if str(col).strip().lower() in target_keywords:
             return col
