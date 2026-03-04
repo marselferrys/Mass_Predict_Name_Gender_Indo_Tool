@@ -36,6 +36,13 @@ client = get_hf_client()
 # ==========================================
 # 3. FUNGSI PENDUKUNG
 # ==========================================
+
+def reset_state():
+    """Fungsi untuk mereset semua state kembali ke default"""
+    st.session_state.cancel_process = False
+    st.session_state.prediction_done = False
+    st.session_state.result_df = None
+    
 def find_name_column(columns):
     target_keywords = ["nama", "name"]
     for col in columns:
@@ -63,7 +70,10 @@ dan menggunakan model *Hybrid MLE-BiLSTM* untuk melabeli Jenis Kelamin secara ma
 
 st.markdown("---")
 
-uploaded_file = st.file_uploader("📂 Unggah file Excel (.xlsx)", type=["xlsx"])
+uploaded_file = st.file_uploader("📂 Unggah file Excel (.xlsx)", 
+                                 type=["xlsx"], 
+                                 on_change=reset_state
+                                )
 
 if uploaded_file is not None:
 
@@ -111,6 +121,9 @@ if uploaded_file is not None:
 
         if cancel_prediction:
             st.session_state.cancel_process = True
+            st.session_state.prediction_done = False
+            st.session_state.result_df = None
+            st.rerun()
 
         # ==========================================
         # PROSES PREDIKSI
