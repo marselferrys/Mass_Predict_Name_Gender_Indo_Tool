@@ -182,7 +182,7 @@ if uploaded_file is not None:
                 status_text.error(f"❌ Error API: {e}")
 
         # ==========================================
-        # TAMPILKAN HASIL (TIDAK HILANG SAAT TOGGLE)
+        # TAMPILKAN HASIL
         # ==========================================
         if st.session_state.prediction_done:
 
@@ -197,10 +197,11 @@ if uploaded_file is not None:
             # TABEL
             # =========================
             with col1:
-                st.markdown("**Preview Data Hasil Prediksi:**")
+                st.markdown("**Preview Hasil Prediksi:**")
                 st.dataframe(df, use_container_width=True, height=350)
 
-                excel_data = create_excel_download(df)
+                df_tabel = df.copy()
+                excel_data = create_excel_download(df_tabel)
 
                 st.download_button(
                     label="💾 Unduh File (.xlsx)",
@@ -217,11 +218,12 @@ if uploaded_file is not None:
                 error_rate = 5 # assign nilai error rate
                 st.markdown(f"**Distribusi Data (error rate {error_rate}%)**")
 
-                df['pred_gender'] = df['pred_gender'].replace(
+                df_pie = df.copy()
+                df_pie['pred_gender'] = df_pie['pred_gender'].replace(
                     {'L': 'Laki-laki', 'P': 'Perempuan'}
                 )
 
-                df_valid = df[df['pred_gender'].isin(['Laki-laki', 'Perempuan'])]
+                df_valid = df_pie[df_pie['pred_gender'].isin(['Laki-laki', 'Perempuan'])]
                 gender_counts = df_valid['pred_gender'].value_counts()
 
                 show_adjusted = st.toggle("Terapkan Error Rate", value=True)
